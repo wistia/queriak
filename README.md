@@ -10,6 +10,8 @@ a curl command to perform the search instead.
 This fails because [unique group counts are added between shards, so duplicate
 copies are double-counted](https://cwiki.apache.org/confluence/display/solr/Result+Grouping?focusedCommentId=47384139#comment-47384139).
 
+[See also](https://wiki.apache.org/solr/FieldCollapsing).
+
 ## Quick Demo (Appears to Work):
 
 `brew install riak`
