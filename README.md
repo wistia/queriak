@@ -60,6 +60,50 @@ dev/dev1/bin/riak-admin member-status
 
 Run: `ruby proveit.rb proof`
 
+## Output
+
+Here is a sample output from the program, with both run types:
+
+```
+$ ruby proveit.rb 
+Generating object 100
+Generating object 200
+Generating object 300
+Generating object 400
+Generating object 500
+Generating object 600
+Generating object 700
+Generating object 800
+Generating object 900
+Generating object 1000
+Waiting 1 second for indexing
+How many total loads were there for account 7? num_found should be ~50.
+44
+How many unique loads were there for account 7? ngroups should be ~22-28.
+24
+Same question with stats.calcDistinct: countDistinct should be ~22-28.
+24
+
+$ ruby proveit.rb proof
+Generating object 100
+Generating object 200
+Generating object 300
+Generating object 400
+Generating object 500
+Generating object 600
+Generating object 700
+Generating object 800
+Generating object 900
+Generating object 1000
+Waiting 1 second for indexing
+How many total loads were there for account 7? num_found should be ~50.
+44
+How many unique loads were there for account 7? ngroups should be ~22-28.
+38
+Same question with stats.calcDistinct: countDistinct should be ~22-28.
+22
+```
+
 ## Credits
 
 Thanks to Wes Jossey for demoing solr4's groupings implementation for me and
