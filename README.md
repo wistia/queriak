@@ -22,3 +22,32 @@ Run: `./proveit.rb`
 
 Riak will generate 1000 random entries, and then perform two similar searches.
 The first shows you total results, and the second shows you distinct results.
+
+## Multi-Node Proof:
+
+Make sure riak is stopped with `riak stop`
+
+Install erlang R16 via `brew install -v --use-gcc erlang-r16`
+
+Install multi-node riak:
+
+```
+curl -O http://s3.amazonaws.com/downloads.basho.com/riak/2.0/2.0.1/riak-2.0.1.tar.gz
+tar zxvf riak-2.0.1.tar.gz
+cd riak-2.0.1
+make devrel DEVNODES=5
+```
+
+Open `dev/dev1/etc/riak.conf` and change `search = off` to `search = on`.
+Repeat for dev2, dev3, dev4 and dev5.
+
+```
+ulimit -n 32768
+for node in dev/dev*; do $node/bin/riak start; done
+for n in {2..5}; do dev/dev$n/bin/riak-admin cluster join dev1@127.0.0.1; done
+dev/dev1/bin/riak-admin cluster plan
+dev/dev1/bin/riak-admin cluster commit
+dev/dev1/bin/riak-admin member-status
+```
+
+Run: `./proveit.rb proof`
