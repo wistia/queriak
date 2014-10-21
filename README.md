@@ -1,13 +1,16 @@
 # queriak
 
-This is a proof of concept that demonstrates how riak-search can be used to
-perform unique (or "distinct") counts on a given field. This is done using
-solr4's "grouping" feature, which optionally returns the number of groups.
+This is a proof of concept that shows that riak-search cannot be used to
+perform unique (or "distinct") counts on a given field reliably. We attempt this
+via solr4's "grouping" feature, which optionally returns the number of groups.
 
 The Riak Ruby client does not yet support the groupings feature, so we construct
 a curl command to perform the search instead.
 
-## Quick Demo:
+This fails because [unique group counts are added between shards, so duplicate
+copies are double-counted](https://cwiki.apache.org/confluence/display/solr/Result+Grouping?focusedCommentId=47384139#comment-47384139).
+
+## Quick Demo (Appears to Work):
 
 `brew install riak`
 
@@ -23,7 +26,7 @@ Run: `./proveit.rb`
 Riak will generate 1000 random entries, and then perform two similar searches.
 The first shows you total results, and the second shows you distinct results.
 
-## Multi-Node Proof:
+## Multi-Node Proof of Failure:
 
 Make sure riak is stopped with `riak stop`
 
