@@ -12,6 +12,9 @@ copies are double-counted](https://cwiki.apache.org/confluence/display/solr/Resu
 
 [See also](https://wiki.apache.org/solr/FieldCollapsing).
 
+We use stats.calcDistinct to iterate over the result set to verify whether our
+final count is truly the distinct count or whether it is artificially inflated.
+
 ## Quick Demo (Appears to Work):
 
 `brew install riak`

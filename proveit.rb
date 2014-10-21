@@ -62,3 +62,6 @@ puts client.search('events_index', 'type_s:load AND account_id_i:7', rows: 0)['n
 
 puts "How many unique loads were there for account 7? ngroups should be ~22-28."
 puts JSON.parse(`curl "http://localhost:#{HTTP_PORT}/search/query/events_index?wt=json&indent=true&rows=0&q=type_s:load%20AND%20account_id_i:7&group=true&group.field=uuid_s&group.ngroups=true" --silent`)['grouped']['uuid_s']['ngroups']
+
+puts "Same question with stats.calcDistinct: countDistinct should be ~22-28."
+puts JSON.parse(`curl "http://localhost:#{HTTP_PORT}/search/query/events_index?wt=json&indent=true&rows=0&q=type_s:load%20AND%20account_id_i:7&facet=true&facet.field=uuid_s&facet.numTerms=true&facet.limit=-1&facet.mincount=1&stats=true&stats.field=uuid_s&stats.calcdistinct=true" --silent`)['stats']['stats_fields']['uuid_s']['countDistinct']
