@@ -59,3 +59,8 @@ dev/dev1/bin/riak-admin member-status
 ```
 
 Run: `ruby proveit.rb proof`
+
+## Credits
+
+Thanks to Wes Jossey for demoing solr4's groupings implementation for me and
+giving me just enough hope to try this out.
