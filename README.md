@@ -26,7 +26,7 @@ ulimit -n 32768
 riak start
 ```
 
-Run: `./proveit.rb`
+Run: `ruby proveit.rb`
 
 Riak will generate 1000 random entries, and then perform two similar searches.
 The first shows you total results, and the second shows you distinct results.
@@ -58,4 +58,4 @@ dev/dev1/bin/riak-admin cluster commit
 dev/dev1/bin/riak-admin member-status
 ```
 
-Run: `./proveit.rb proof`
+Run: `ruby proveit.rb proof`
