@@ -38,7 +38,7 @@ sleep 1
 # Search
 
 puts "How many total loads were there for account 7? numFound should be ~50."
-puts JSON.parse(`curl "http://localhost:8098/search/query/events_index?wt=json&indent=true&rows=0&q=type_s:load%20AND%20account_id_i:7" --silent`)['response']['numFound']
+puts client.search('events_index', 'type_s:load AND account_id_i:7', rows: 0)['num_found']
 
 puts "How many unique loads were there for account 7? ngroups should be ~22-28."
 puts JSON.parse(`curl "http://localhost:8098/search/query/events_index?wt=json&indent=true&rows=0&q=type_s:load%20AND%20account_id_i:7&group=true&group.field=uuid_s&group.ngroups=true" --silent`)['grouped']['uuid_s']['ngroups']
